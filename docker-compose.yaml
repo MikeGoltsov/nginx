@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  nginx:
+    hostname: let
+    domainname: me.play
+    build: ./
+    image: nginx-vay:latest
+    volumes:
+       - type: bind 
+         source: /dev
+         target: /dev
+         read_only: true
+       - type: bind
+         source: ./index.html
+         target: /usr/share/nginx/html/index.html
+    ports:
+        - "10080:80"
+        - "10443:443"
+    cap_add:
+       - SYS_RAWIO
+    restart: always
